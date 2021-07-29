@@ -26,7 +26,7 @@ class RCNN(nn.Module):
         feature_dim = 25088
         self.backbone = vgg_backbone
         self.cls_score = nn.Linear(feature_dim, \
-                13) # this is not the way to do it 
+                14) # this is not the way to do it 
         self.bbox = nn.Sequential(
                 nn.Linear(feature_dim, 512),
                 nn.ReLU(),
@@ -101,7 +101,7 @@ class MyDataSet(Dataset):
         self.data = []
         self.images = []
         for f in os.listdir(self.label_text):
-            if 'gt_whole.txt' in f:
+            if 'gt_whole.txt' in f and "M0202" in f:
                 with open(self.label_text+'/'+f) as filerino:
                     for line in filerino:
                         if line:
@@ -109,8 +109,10 @@ class MyDataSet(Dataset):
 
         for (dirpath, dirnames, filenames) in os.walk(self.image_folder):
             for filename in filenames:
-                if filename.endswith('.jpg'):
+                if filename.endswith('.jpg') and "M0202" in dirpath:
                     self.images.append([filename, dirpath, os.sep.join([dirpath, filename])])
+
+        print(len(self.images))
 
     def __len__(self):
         return len(self.images)
@@ -257,7 +259,17 @@ if __name__ == '__main__':
     dataset = MyDataSet('./UAV-benchmark-M/', './UAV-benchmark-MOTD_v1.0/GT/')
     N = 5 
     n_train = 9*N //10
-
+    for img, bbs, classes, fpath in dataset:
+        H, W, _ = img.shape
+        newfile = fpath.replace('jpg', 'txt')
+        with open(newfile, 'w') as f:
+            for (bb, cl) in zip(bbs, classes):
+                print(bb[0])
+                bb[0] = float(bb[0] + bb[0] + bb[2]) / 2.0 
+                bb[1] = float(bb[1] + bb[1] + bb[3]) / 2.0 
+                x,y,w,h = bb[0], bb[1], bb[2], bb[3]
+                f.write("{} {} {} {} {} \n".format(cl, x/W, y/H, w/W, h/H))
+    exit(1)
     FPATHS, GTBBS, CLSS, DELTAS, ROIS, IOUS = [],[],[],[],[],[]
     for idx, (img, bbs, classes, fpath) in enumerate(dataset):
         if idx == N:
