@@ -1,0 +1,6 @@
+classes= 15
+train  = /home/bloat/dev/szakgyak/video_learn/UAV-benchmark-M/train.txt
+valid  = /home/bloat/dev/szakgyak/video_learn/UAV-benchmark-M/test.txt
+names = labels.txt
+backup = ./backup/
+
