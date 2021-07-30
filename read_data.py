@@ -3,11 +3,6 @@ import h5py
 import numpy as np
 from PIL import Image
 
-# Lacinak irni, hogy: 
-# kene dron datase
-# mi van meg
-# beszeltem lucaval
-# aug. 9-en lesz a kovetkezo meeting, addig az image segmentationnel fogok foglalkozni
 
 def get(df, what):
     return np.array(df.get(what))
