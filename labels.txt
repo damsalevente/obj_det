@@ -1,0 +1,12 @@
+person_on_vhcl
+car
+bicycle
+mbike
+non_mot_vhcl
+static_person
+distractor
+occluder
+occluder_on_grnd
+occluder_full
+reflection
+crowd
