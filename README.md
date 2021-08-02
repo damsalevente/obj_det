@@ -13,3 +13,8 @@ I could use the coco or bdd100k dataset models, with mask-rcnn, or i could use t
 
 This also exists: YolACT++ yolact etc. 
  
+# object detection grand challange in poland 
+
+Agriculture related 
+
+https://medium.com/@karundefined%20reference%20to%20%60TIFFReadRGBAStrip@LIBTIFF_4.0'ol_majek/erl-emergency-2017-deep-learning-to-the-rescue-8da3d8dca61f
